@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moorabba.ir | مرباها، ترشیجات و عرقیجات خانگی</title>
+  <meta name="description" content="مربا، ترشی و عرقیجات خانگی با طعم اصیل و مواد اولیه ارگانیک در Moorabba.ir">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -40,7 +41,7 @@
       z-index: 0;
       opacity: 0.19;
       filter: blur(1.2px);
-      font-size: 7vw;
+      font-size: clamp(8rem, 7vw, 5rem);
       pointer-events: none;
       user-select: none;
       animation: fruitAnim 16s infinite cubic-bezier(0.5, 1.5, 0.5, -0.5);
@@ -66,31 +67,49 @@
     }
     @keyframes fruitRightAnim {
       0% { transform: translateY(0) scale(1) rotate(0deg); }
-      20% { transform: translateY(25px) scale(1.09) rotate(10deg); }
+      20% { transform: translateY(25px) scale(1.5) rotate(10deg); }
       40% { transform: translateY(-25px) scale(1.15) rotate(18deg); }
       60% { transform: translateY(18px) scale(1.12) rotate(9deg); }
       80% { transform: translateY(-35px) scale(1.08) rotate(17deg); }
       100% { transform: translateY(0) scale(1) rotate(0deg); }
     }
-    @media (max-width: 768px) {
-      .floating-fruit { font-size: 15vw; }
-      .fruit-left.fruit-4, .fruit-right.fruit-8 { display: none; }
+
+    .floating-product-fruit {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.4;
+      font-size: clamp(12rem, 10vw, 8rem);
+      pointer-events: none;
+      user-select: none;
+      animation: productFruitAnim 12s infinite ease-in-out;
+      will-change: transform;
+    }
+    .product-fruit-left { left: 10px; }
+    .product-fruit-right { right: 20px; }
+    .product-fruit-top-left { top: 20px; left: 20px; }
+    .product-fruit-top-right { top: 20px; right: 20px; }
+    .product-fruit-bottom-left { bottom: 20px; left: 20px; }
+    .product-fruit-bottom-right { bottom: 30px; right: 10px; }
+    @keyframes productFruitAnim {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(45deg); }
+      100% { transform: translateY(0) rotate(0deg); }
     }
 
     .container {
-      width: 90%;
+      width: 95%;
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 15px;
     }
 
     section {
-      padding: 80px 0;
+      padding: clamp(40px, 8vw, 80px) 0;
       position: relative;
     }
 
     .section-title {
-      font-size: 2.8rem;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
       color: var(--primary);
       text-align: center;
       margin-bottom: 20px;
@@ -114,7 +133,7 @@
     }
 
     .section-subtitle {
-      font-size: 1.3rem;
+      font-size: clamp(1rem, 2vw, 1.3rem);
       color: var(--text);
       text-align: center;
       max-width: 700px;
@@ -125,13 +144,13 @@
 
     .btn {
       display: inline-block;
-      padding: 12px 22px;
+      padding: clamp(8px, 2vw, 12px) clamp(15px, 3vw, 22px);
       border-radius: 50px;
       font-weight: 600;
       cursor: pointer;
       transition: var(--transition);
       border: none;
-      font-size: 1rem;
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
       background: linear-gradient(to right, var(--primary), var(--secondary));
       color: var(--white);
       box-shadow: var(--box-shadow);
@@ -145,11 +164,10 @@
       animation: pulse 1s infinite;
     }
 
-    header {
+    .header {
       background: rgba(255, 255, 255, 0.95);
       box-shadow: var(--box-shadow);
-      position: fixed;
-      width: 100%;
+      position: sticky;
       top: 0;
       z-index: 1000;
       backdrop-filter: blur(10px);
@@ -160,11 +178,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 0;
+      padding: clamp(15px, 3vw, 20px) 0;
     }
 
     .logo {
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 3vw, 2rem);
       font-weight: 900;
       color: var(--primary);
       display: flex;
@@ -176,7 +194,7 @@
     .nav-links {
       display: flex;
       list-style: none;
-      gap: 30px;
+      gap: clamp(15px, 3vw, 30px);
     }
 
     .nav-links li a {
@@ -197,7 +215,7 @@
       display: none;
       background: none;
       border: none;
-      font-size: 1.8rem;
+      font-size: clamp(1.5rem, 3vw, 1.8rem);
       color: var(--primary);
       cursor: pointer;
     }
@@ -205,7 +223,7 @@
     .cart-icon {
       position: relative;
       cursor: pointer;
-      font-size: 1.5rem;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
       color: var(--primary);
       margin-left: 20px;
       transition: transform 0.3s ease;
@@ -253,13 +271,12 @@
     .cart-sidebar {
       position: fixed;
       top: 0;
-      right: -450px;
-      width: 100%;
-      max-width: 450px;
+      right: -100%;
+      width: clamp(300px, 80%, 450px);
       height: 100%;
       background: white;
       z-index: 9999;
-      transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+      transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
       display: flex;
       flex-direction: column;
     }
@@ -278,7 +295,7 @@
     }
 
     .cart-title {
-      font-size: 1.5rem;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
       color: var(--primary);
     }
 
@@ -298,7 +315,7 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 20px;
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 2vw, 1.2rem);
       font-weight: 700;
       color: var(--text);
     }
@@ -312,7 +329,7 @@
       color: white;
       border: none;
       border-radius: 50px;
-      font-size: 1.1rem;
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
       font-weight: 600;
       cursor: pointer;
       transition: var(--transition);
@@ -347,8 +364,7 @@
 
     .payment-content {
       background: white;
-      width: 90%;
-      max-width: 500px;
+      width: clamp(300px, 90%, 500px);
       border-radius: 20px;
       overflow: hidden;
       transform: translateY(50px);
@@ -374,7 +390,7 @@
     }
 
     .hero {
-      padding: 160px 0 80px;
+      padding: clamp(100px, 15vw, 160px) 0 clamp(40px, 8vw, 80px);
       background: linear-gradient(135deg, rgba(233, 30, 99, 0.7), rgba(136, 14, 79, 0.7)), url('https://images.unsplash.com/photo-1589308078050-9721cf2aa65d?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
       color: var(--white);
       text-align: center;
@@ -384,7 +400,7 @@
 
     .hero-fruit {
       position: absolute;
-      font-size: 4rem;
+      font-size: clamp(2rem, 4vw, 3rem);
       opacity: 0.2;
       animation: float 10s infinite ease-in-out;
     }
@@ -426,7 +442,7 @@
     }
 
     .hero h1 {
-      font-size: 3.8rem;
+      font-size: clamp(2rem, 5vw, 3.8rem);
       margin-bottom: 20px;
       animation: fadeInUp 1s forwards 0.7s;
       transform: scale(0.8);
@@ -434,7 +450,7 @@
     }
 
     .hero p {
-      font-size: 1.5rem;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
       margin-bottom: 40px;
       animation: fadeInUp 1s forwards 0.9s;
       opacity: 0;
@@ -443,24 +459,54 @@
     .hero-btns {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: clamp(10px, 2vw, 20px);
       animation: fadeInUp 1s forwards 1.1s;
       opacity: 0;
     }
 
+    .about {
+      background: var(--white);
+      position: relative;
+    }
+
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-image {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: var(--box-shadow);
+    }
+
     .products {
       background: var(--white);
+      position: relative;
     }
 
     .product-filter {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: clamp(10px, 2vw, 20px);
       margin-bottom: 40px;
+      flex-wrap: wrap;
     }
 
     .filter-btn {
-      padding: 10px 20px;
+      padding: clamp(8px, 2vw, 10px) clamp(15px, 3vw, 20px);
       border: 2px solid var(--primary);
       border-radius: 50px;
       background: none;
@@ -484,9 +530,21 @@
 
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 35px;
+      grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 30vw, 300px), 1fr));
+      gap: clamp(20px, 3vw, 35px);
       min-height: 700px;
+      position: relative;
+    }
+
+    .products-grid.loading::after {
+      content: 'در حال بارگذاری...';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      color: var(--primary);
+      animation: pulse 1.5s infinite;
     }
 
     .product-card {
@@ -514,7 +572,7 @@
     }
 
     .product-img {
-      height: 280px;
+      height: clamp(200px, 25vw, 280px);
       overflow: hidden;
       position: relative;
     }
@@ -539,16 +597,16 @@
       padding: 8px 15px;
       border-radius: 30px;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: clamp(0.8rem, 1.5vw, 0.9rem);
       animation: pulse 2s infinite;
     }
 
     .product-content {
-      padding: 25px;
+      padding: clamp(15px, 3vw, 25px);
     }
 
     .product-title {
-      font-size: 1.8rem;
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
       color: var(--text);
       margin-bottom: 10px;
       transition: var(--transition);
@@ -561,6 +619,7 @@
     .product-desc {
       color: var(--light-text);
       margin-bottom: 20px;
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
     }
 
     .product-meta {
@@ -570,7 +629,7 @@
     }
 
     .product-price {
-      font-size: 1.8rem;
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
       font-weight: 700;
       color: var(--primary);
     }
@@ -584,8 +643,8 @@
     }
 
     .cart-item-image img {
-      width: 80px;
-      height: 80px;
+      width: clamp(60px, 10vw, 80px);
+      height: clamp(60px, 10vw, 80px);
       object-fit: cover;
       border-radius: 10px;
       margin-left: 15px;
@@ -596,13 +655,13 @@
     }
 
     .cart-item-title {
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 2vw, 1.2rem);
       color: var(--text);
       margin-bottom: 10px;
     }
 
     .cart-item-price {
-      font-size: 1rem;
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
       color: var(--primary);
       margin-bottom: 10px;
     }
@@ -629,14 +688,14 @@
     }
 
     .item-quantity {
-      font-size: 1rem;
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
       color: var(--text);
     }
 
     footer {
       background: linear-gradient(to right, var(--dark), #6a0f49);
       color: var(--white);
-      padding: 80px 0 30px;
+      padding: clamp(40px, 8vw, 80px) 0 30px;
     }
 
     .footer-content {
@@ -647,7 +706,7 @@
     }
 
     .footer-col h4 {
-      font-size: 1.5rem;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
       margin-bottom: 25px;
       animation: fadeInUp 0.8s forwards;
       opacity: 0;
@@ -705,6 +764,29 @@
       transform: scale(1.2);
     }
 
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      color: var(--white);
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+      transform: scale(1.2);
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+      margin-top: 20px;
+    }
+
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -742,7 +824,16 @@
       to { transform: rotate(360deg); }
     }
 
+    @media (max-width: 1024px) {
+      .floating-fruit { font-size: 5vw; }
+      .floating-product-fruit { font-size: 3rem; }
+      .product-card { margin-bottom: 20px; }
+    }
+
     @media (max-width: 768px) {
+      .floating-fruit { font-size: 10vw; }
+      .fruit-left.fruit-4, .fruit-right.fruit-8 { display: none; }
+      .floating-product-fruit { font-size: 2rem; }
       .nav-links {
         position: fixed;
         top: 80px;
@@ -764,13 +855,39 @@
       }
 
       .hero h1 {
-        font-size: 2.8rem;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+      }
+
+      .hero p {
+        font-size: clamp(0.9rem, 2vw, 1.2rem);
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        gap: 15px;
       }
 
       .product-filter {
         flex-direction: column;
         align-items: center;
       }
+
+      .about-content {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .floating-fruit { font-size: 12vw; }
+      .floating-product-fruit { font-size: 1.5rem; }
+      .section-title { font-size: 1.8rem; }
+      .section-subtitle { font-size: 1rem; }
+      .btn { font-size: 0.9rem; padding: 10px 18px; }
+      .product-img { height: 200px; }
+      .product-title { font-size: 1.2rem; }
+      .product-price { font-size: 1.2rem; }
+      .cart-sidebar { width: 100%; }
+      .cart-item-image img { width: 60px; height: 60px; }
     }
 
     /* Accessibility improvements */
@@ -780,6 +897,13 @@
     .btn:focus, .add-to-cart:focus, .checkout-btn:focus, .close-cart:focus, .mobile-menu-btn:focus, .remove-item:focus {
       box-shadow: 0 0 0 2px var(--accent);
     }
+
+    /* Lazy loading placeholder */
+    .product-img img:not([src]) {
+      background: #eee;
+      min-height: 100%;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -788,10 +912,28 @@
   <span class="floating-fruit fruit-left fruit-2">🍊</span>
   <span class="floating-fruit fruit-left fruit-3">🍒</span>
   <span class="floating-fruit fruit-left fruit-4">🍏</span>
-  <span class="floating-fruit fruit-right fruit-5">🍍</span>
+  <span class="floating-fruit fruit-right fruit-5">🍒</span>
   <span class="floating-fruit fruit-right fruit-6">🍓</span>
   <span class="floating-fruit fruit-right fruit-7">🍑</span>
   <span class="floating-fruit fruit-right fruit-8">🍋</span>
+
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo" aria-label="لوگوی سایت"><i class="fas fa-jar"></i> Moorabba.ir</a>
+      <div style="display: flex; align-items: center;">
+        <div class="cart-icon" id="openCart" aria-label="سبد خرید"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></div>
+        <button class="mobile-menu-btn" aria-label="باز کردن منو موبایل"><i class="fas fa-bars"></i></button>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">خانه</a></li>
+        <li><a href="#about">درباره ما</a></li>
+        <li><a href="#products">مرباها</a></li>
+        <li><a href="#products" data-filter="pickles">ترشیجات</a></li>
+        <li><a href="#products" data-filter="distillates">عرقیجات</a></li>
+        <li><a href="#contact">تماس</a></li>
+      </ul>
+    </div>
+  </header>
 
   <section class="hero">
     <div class="hero-fruits">
@@ -802,15 +944,134 @@
       <span class="hero-fruit fruit-lemon">🍋</span>
       <span class="hero-fruit fruit-cherry">🍒</span>
       <span class="hero-fruit fruit-peach">🍑</span>
-      <span class="hero-fruit fruit-pear">🍐</span>
+      <span class="hero-fruit fruit-pear">🍓</span>
     </div>
     <div class="container">
       <div class="hero-content">
-        <h1>مرباها، ترشیجات و عرقیجات خانگی با طعم اصیل</h1>
+        <h1>مربا, ترشی و عرقیجات خانگی با طعم اصیل</h1>
         <p>تجربه طعم‌های طبیعی و ارگانیک با استفاده از بهترین مواد اولیه و روش‌های سنتی</p>
         <div class="hero-btns">
           <a href="#products" class="btn" aria-label="مشاهده محصولات">مشاهده محصولات</a>
           <a href="#about" class="btn" style="background: transparent; border: 2px solid white;" aria-label="درباره ما">درباره ما</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section id="products" class="products">
+    <div class="container">
+      <h2 class="section-title">محصولات ارگانیک</h2>
+      <p class="section-subtitle">لذت طعم‌های متنوع و طبیعی را با محصولات خانگی ما تجربه کنید</p>
+      <div class="product-filter">
+        <button class="filter-btn active" data-filter="all" aria-label="نمایش همه محصولات">همه</button>
+        <button class="filter-btn" data-filter="jams" aria-label="نمایش مرباها">مرباها</button>
+        <button class="filter-btn" data-filter="pickles" aria-label="نمایش ترشیجات">ترشیجات</button>
+        <button class="filter-btn" data-filter="distillates" aria-label="نمایش عرقیجات">عرقیجات</button>
+      </div>
+      <div class="products-grid" id="productsGrid">
+        <span class="floating-product-fruit product-fruit-left">🍓</span>
+        <span class="floating-product-fruit product-fruit-right">🍊</span>
+        <span class="floating-product-fruit product-fruit-top-left">🍒</span>
+        <span class="floating-product-fruit product-fruit-top-right">🍏</span>
+        <span class="floating-product-fruit product-fruit-bottom-left">🍒</span>
+        <span class="floating-product-fruit product-fruit-bottom-right">🍑</span>
+        <div class="product-card" data-category="jams">
+          <div class="product-img">
+            <img src="images/badranj.jpg" alt="مربای بهار نارنج" loading="lazy">
+            <div class="product-badge">پرفروش</div>
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">مربای بهار نارنج</h3>
+            <p class="product-desc">ترکیبی بی‌نظیر از گل‌های تازه بهار نارنج با عطر و طعمی فراموش‌نشدنی</p>
+            <div class="product-meta">
+              <div class="product-price">۴۵,۰۰۰ تومان</div>
+              <button class="btn add-to-cart" data-id="1" data-name="مربای بهار نارنج" data-price="45000" data-image="images/badranj.jpg">افزودن به سبد</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-category="jams">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1599921846844-1b2571eb3500?auto=format&fit=crop&w=600&q=80" alt="مربای تمشک کوهی" loading="lazy">
+            <div class="product-badge">جدید</div>
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">مربای تمشک کوهی</h3>
+            <p class="product-desc">تمشک‌های ارگانیک کوهی با طعم ترش و شیرین طبیعی</p>
+            <div class="product-meta">
+              <div class="product-price">۵۵,۰۰۰ تومان</div>
+              <button class="btn add-to-cart" data-id="2" data-name="مربای تمشک کوهی" data-price="55000" data-image="https://images.unsplash.com/photo-1599921846844-1b2571eb3500?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-category="pickles">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80" alt="ترشی گل کلم" loading="lazy">
+            <div class="product-badge">ارگانیک</div>
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">ترشی گل کلم</h3>
+            <p class="product-desc">ترشی گل کلم با طعم تند و متعادل، تهیه شده با سبزیجات تازه</p>
+            <div class="product-meta">
+              <div class="product-price">۴۸,۰۰۰ تومان</div>
+              <button class="btn add-to-cart" data-id="5" data-name="ترشی گل کلم" data-price="48000" data-image="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-category="pickles">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80" alt="ترشی لیته" loading="lazy">
+            <div class="product-badge">محبوب</div>
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">ترشی لیته</h3>
+            <p class="product-desc">ترشی لیته با ترکیب سبزیجات خرد شده و ادویه‌های سنتی</p>
+            <div class="product-meta">
+              <div class="product-price">۴۵,۰۰۰ تومان</div>
+              <button class="btn add-to-cart" data-id="6" data-name="ترشی لیته" data-price="45000" data-image="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-category="distillates">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80" alt="عرق نعنا" loading="lazy">
+            <div class="product-badge">پرطرفدار</div>
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">عرق نعنا</h3>
+            <p class="product-desc">عرق نعنا خالص و ارگانیک با خواص گوارشی و آرام‌بخش</p>
+            <div class="product-meta">
+              <div class="product-price">۳۵,۰۰۰ تومان</div>
+              <button class="btn add-to-cart" data-id="7" data-name="عرق نعنا" data-price="35000" data-image="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-category="distillates">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80" alt="عرق بادرنجبویه" loading="lazy">
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">عرق بادرنجبویه</h3>
+            <p class="product-desc">عرق بادرنجبویه با خواص آرام‌بخش و تقویت‌کننده قلب</p>
+            <div class="product-meta">
+              <div class="product-price">۳۸,۰۰۰ تومان</div>
+              <button class="btn add-to-cart" data-id="8" data-name="عرق بادرنجبویه" data-price="38000" data-image="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card" data-category="distillates">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80" alt="عرق آویشن" loading="lazy">
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">عرق آویشن</h3>
+            <p class="product-desc">عرق آویشن ارگانیک با خواص ضدعفونی‌کننده و تقویت‌کننده</p>
+            <div class="product-meta">
+              <div class="product-price">۳۶,۰۰۰ تومان</div>
+              <button class="btn add-to-cart" data-id="9" data-name="عرق آویشن" data-price="36000" data-image="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -852,136 +1113,22 @@
       </div>
     </div>
   </div>
-
-  <header>
-    <div class="container nav-container">
-      <a href="#" class="logo" aria-label="لوگوی سایت"><i class="fas fa-jar"></i> Moorabba.ir</a>
-      <div style="display: flex; align-items: center;">
-        <div class="cart-icon" id="openCart" aria-label="سبد خرید"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></div>
-        <button class="mobile-menu-btn" aria-label="باز کردن منو موبایل"><i class="fas fa-bars"></i></button>
-      </div>
-      <ul class="nav-links">
-        <li><a href="#">خانه</a></li>
-        <li><a href="#about">درباره ما</a></li>
-        <li><a href="#products">مرباها</a></li>
-        <li><a href="#products" data-filter="pickles">ترشیجات</a></li>
-        <li><a href="#products" data-filter="distillates">عرقیجات</a></li>
-        <li><a href="#contact">تماس</a></li>
-      </ul>
-    </div>
-  </header>
-
-  <section id="products" class="products">
+  <section id="about" class="about">
     <div class="container">
-      <h2 class="section-title">محصولات ارگانیک</h2>
-      <p class="section-subtitle">لذت طعم‌های متنوع و طبیعی را با محصولات خانگی ما تجربه کنید</p>
-      <div class="product-filter">
-        <button class="filter-btn active" data-filter="all" aria-label="نمایش همه محصولات">همه</button>
-        <button class="filter-btn" data-filter="jams" aria-label="نمایش مرباها">مرباها</button>
-        <button class="filter-btn" data-filter="pickles" aria-label="نمایش ترشیجات">ترشیجات</button>
-        <button class="filter-btn" data-filter="distillates" aria-label="نمایش عرقیجات">عرقیجات</button>
-      </div>
-      <div class="products-grid" id="productsGrid">
-        <div class="product-card" data-category="jams">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1623846547660-b6c9c0d1a996?auto=format&fit=crop&w=600&q=80" alt="مربای بهار نارنج" loading="lazy">
-            <div class="product-badge">پرفروش</div>
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">مربای بهار نارنج</h3>
-            <p class="product-desc">ترکیبی بی‌نظیر از گل‌های تازه بهار نارنج با عطر و طعمی فراموش‌نشدنی</p>
-            <div class="product-meta">
-              <div class="product-price">۴۵,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="1" data-name="مربای بهار نارنج" data-price="45000" data-image="https://images.unsplash.com/photo-1623846547660-b6c9c0d1a996?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
-            </div>
-          </div>
+      <h2 class="section-title">درباره ما</h2>
+      <p class="section-subtitle">داستان ما و تعهدمان به کیفیت و اصالت</p>
+      <div class="about-content">
+        <div class="about-text">
+          <p>در Moorabba.ir، ما با عشق و دقت، بهترین مرباها، ترشیجات و عرقیجات خانگی را تولید می‌کنیم. هر محصول با استفاده از مواد اولیه تازه و ارگانیک و روش‌های سنتی تهیه می‌شود تا طعم اصیل و طبیعی را به خانه‌های شما بیاوریم.</p>
+          <p>هدف ما حفظ سنت‌های ایرانی و ارائه محصولاتی است که نه تنها خوشمزه، بلکه سالم و باکیفیت باشند. با ما همراه شوید و طعم واقعی طبیعت را تجربه کنید!</p>
+          <a href="#products" class="btn" style="margin-top: 20px;" aria-label="مشاهده محصولات ما">مشاهده محصولات ما</a>
         </div>
-        <div class="product-card" data-category="jams">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1603532648955-a039f2e5da76?auto=format&fit=crop&w=600&q=80" alt="مربای تمشک کوهی" loading="lazy">
-            <div class="product-badge">جدید</div>
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">مربای تمشک کوهی</h3>
-            <p class="product-desc">تمشک‌های ارگانیک کوهی با طعم ترش و شیرین طبیعی</p>
-            <div class="product-meta">
-              <div class="product-price">۵۵,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="2" data-name="مربای تمشک کوهی" data-price="55000" data-image="https://images.unsplash.com/photo-1603532648955-a039f2e5da76?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="pickles">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1599923379370-6d1b8b9263c7?auto=format&fit=crop&w=600&q=80" alt="ترشی گل کلم" loading="lazy">
-            <div class="product-badge">ارگانیک</div>
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">ترشی گل کلم</h3>
-            <p class="product-desc">ترشی گل کلم با طعم تند و متعادل، تهیه شده با سبزیجات تازه</p>
-            <div class="product-meta">
-              <div class="product-price">۴۸,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="5" data-name="ترشی گل کلم" data-price="48000" data-image="https://images.unsplash.com/photo-1599923379370-6d1b8b9263c7?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="pickles">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1600431521340-453d757bc0f1?auto=format&fit=crop&w=600&q=80" alt="ترشی لیته" loading="lazy">
-            <div class="product-badge">محبوب</div>
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">ترشی لیته</h3>
-            <p class="product-desc">ترشی لیته با ترکیب سبزیجات خرد شده و ادویه‌های سنتی</p>
-            <div class="product-meta">
-              <div class="product-price">۴۵,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="6" data-name="ترشی لیته" data-price="45000" data-image="https://images.unsplash.com/photo-1600431521340-453d757bc0f1?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="distillates">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1598373182133-524af156dc9b?auto=format&fit=crop&w=600&q=80" alt="عرق نعنا" loading="lazy">
-            <div class="product-badge">پرطرفدار</div>
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">عرق نعنا</h3>
-            <p class="product-desc">عرق نعنا خالص و ارگانیک با خواص گوارشی و آرام‌بخش</p>
-            <div class="product-meta">
-              <div class="product-price">۳۵,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="7" data-name="عرق نعنا" data-price="35000" data-image="https://images.unsplash.com/photo-1598373182133-524af156dc9b?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="distillates">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1619451050571-4c846589e4d9?auto=format&fit=crop&w=600&q=80" alt="عرق بادرنجبویه" loading="lazy">
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">عرق بادرنجبویه</h3>
-            <p class="product-desc">عرق بادرنجبویه با خواص آرام‌بخش و تقویت‌کننده قلب</p>
-            <div class="product-meta">
-              <div class="product-price">۳۸,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="8" data-name="عرق بادرنجبویه" data-price="38000" data-image="https://images.unsplash.com/photo-1619451050571-4c846589e4d9?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
-            </div>
-          </div>
-        </div>
-        <div class="product-card" data-category="distillates">
-          <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80" alt="عرق آویشن" loading="lazy">
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">عرق آویشن</h3>
-            <p class="product-desc">عرق آویشن ارگانیک با خواص ضدعفونی‌کننده و تقویت‌کننده</p>
-            <div class="product-meta">
-              <div class="product-price">۳۶,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="9" data-name="عرق آویشن" data-price="36000" data-image="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
-            </div>
-          </div>
+        <div class="about-image">
+          <img src="images/about.jpg" alt="درباره ما" loading="lazy">
         </div>
       </div>
     </div>
   </section>
-
   <footer id="contact">
     <div class="container">
       <div class="footer-content">
@@ -1029,6 +1176,7 @@
       </div>
     </div>
   </footer>
+
   <script>
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartCount = document.getElementById('cartCount');
@@ -1043,6 +1191,14 @@
     const checkoutBtn = document.getElementById('checkoutBtn');
     const paymentModal = document.getElementById('paymentModal');
     const productsGrid = document.getElementById('productsGrid');
+
+    function initialize() {
+      productsGrid.classList.add('loading');
+      setTimeout(() => {
+        productsGrid.classList.remove('loading');
+        updateCart();
+      }, 500); // Simulate loading delay
+    }
 
     openCartBtn.addEventListener('click', openCart);
     closeCartBtn.addEventListener('click', closeCart);
@@ -1077,12 +1233,16 @@
 
     document.querySelectorAll('.filter-btn').forEach(button => {
       button.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        const filter = button.dataset.filter;
-        document.querySelectorAll('.product-card').forEach(card => {
-          card.style.display = filter === 'all' || card.dataset.category === filter ? 'block' : 'none';
-        });
+        productsGrid.classList.add('loading');
+        setTimeout(() => {
+          document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          const filter = button.dataset.filter;
+          document.querySelectorAll('.product-card').forEach(card => {
+            card.style.display = filter === 'all' || card.dataset.category === filter ? 'block' : 'none';
+          });
+          productsGrid.classList.remove('loading');
+        }, 300);
       });
     });
 
@@ -1111,7 +1271,7 @@
           cartItem.className = 'cart-item';
           cartItem.innerHTML = `
             <div class="cart-item-image">
-              <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/80'">
+              <img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/80'">
             </div>
             <div class="cart-item-details">
               <h3 class="cart-item-title">${item.name}</h3>
@@ -1125,34 +1285,6 @@
             </div>
           `;
           cartBody.appendChild(cartItem);
-        });
-
-        // Event delegation for cart actions
-        cartBody.addEventListener('click', function(e) {
-          if (e.target.classList.contains('decrease') || e.target.parentElement.classList.contains('decrease')) {
-            const id = e.target.dataset.id || e.target.parentElement.dataset.id;
-            const item = cart.find(item => item.id === id);
-            if (item.quantity > 1) {
-              item.quantity--;
-            } else {
-              cart = cart.filter(item => item.id !== id);
-            }
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCart();
-          }
-          if (e.target.classList.contains('increase') || e.target.parentElement.classList.contains('increase')) {
-            const id = e.target.dataset.id || e.target.parentElement.dataset.id;
-            const item = cart.find(item => item.id === id);
-            item.quantity++;
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCart();
-          }
-          if (e.target.classList.contains('remove-item') || e.target.parentElement.classList.contains('remove-item')) {
-            const id = e.target.dataset.id || e.target.parentElement.dataset.id;
-            cart = cart.filter(item => item.id !== id);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCart();
-          }
         });
 
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -1226,8 +1358,16 @@
       });
     });
 
-    // Initialize cart on page load
-    updateCart();
+    const productFruits = document.querySelectorAll('.floating-product-fruit');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      productFruits.forEach(fruit => {
+        const speed = fruit.classList.contains('product-fruit-left') || fruit.classList.contains('product-fruit-right') ? 0.5 : 0.3;
+        fruit.style.transform = `translateY(${scrollY * speed}px) rotate(${scrollY * 0.05}deg)`;
+      });
+    });
+
+    window.addEventListener('load', initialize);
   </script>
 </body>
 </html>
