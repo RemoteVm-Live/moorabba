@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moorabba.ir | مرباها، ترشیجات و عرقیجات خانگی</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -34,20 +36,60 @@
       overflow-x: hidden;
     }
 
-    .fruit {
-      position: absolute;
-      z-index: -1;
-      opacity: 0.1;
-      filter: blur(1px);
-      animation: float 15s infinite ease-in-out;
-      font-size: 3rem;
+    .floating-fruit {
+      position: fixed;
+      z-index: 0;
+      opacity: 0.19;
+      filter: blur(1.2px);
+      font-size: 7vw;
+      pointer-events: none;
+      user-select: none;
+      animation-iteration-count: infinite;
+      animation-timing-function: cubic-bezier(.5,1.5,.5,-0.5);
+      will-change: transform;
     }
-
-    .fruit-1 { top: 10%; left: 5%; animation-delay: 0s; }
-    .fruit-2 { top: 25%; right: 7%; animation-delay: 2s; }
-    .fruit-3 { bottom: 30%; left: 10%; animation-delay: 4s; }
-    .fruit-4 { bottom: 15%; right: 12%; animation-delay: 6s; }
-    .fruit-5 { top: 40%; right: 20%; animation-delay: 8s; }
+    /* سمت چپ */
+    .fruit-left {
+      left: 0;
+      animation-name: fruitLeftAnim;
+    }
+    .fruit-left.fruit-1 { top: 8vh; animation-delay: 0s;}
+    .fruit-left.fruit-2 { top: 30vh; animation-delay: 2s;}
+    .fruit-left.fruit-3 { top: 72vh; animation-delay: 4s;}
+    .fruit-left.fruit-4 { top: 130vh; animation-delay: 6s;}
+    /* سمت راست */
+    .fruit-right {
+      right: 0;
+      animation-name: fruitRightAnim;
+    }
+    .fruit-right.fruit-5 { top: 16vh; animation-delay: 1s;}
+    .fruit-right.fruit-6 { top: 52vh; animation-delay: 3s;}
+    .fruit-right.fruit-7 { top: 100vh; animation-delay: 5s;}
+    .fruit-right.fruit-8 { top: 150vh; animation-delay: 7s;}
+    /* انیمیشن زیگزاگی و چرخشی */
+    .floating-fruit {
+      animation-duration: 16s;
+    }
+    @keyframes fruitLeftAnim {
+      0%   { transform: translateY(0) scale(1) rotate(0deg);}
+      16%  { transform: translateY(-35px) scale(1.07) rotate(-8deg);}
+      33%  { transform: translateY(20px) scale(1.13) rotate(-18deg);}
+      50%  { transform: translateY(-25px) scale(0.95) rotate(7deg);}
+      67%  { transform: translateY(18px) scale(1.09) rotate(-12deg);}
+      100% { transform: translateY(0) scale(1) rotate(0deg);}
+    }
+    @keyframes fruitRightAnim {
+      0%   { transform: translateY(0) scale(1) rotate(0deg);}
+      20%  { transform: translateY(25px) scale(1.09) rotate(10deg);}
+      40%  { transform: translateY(-25px) scale(1.15) rotate(18deg);}
+      60%  { transform: translateY(18px) scale(1.12) rotate(9deg);}
+      80%  { transform: translateY(-35px) scale(1.08) rotate(17deg);}
+      100% { transform: translateY(0) scale(1) rotate(0deg);}
+    }
+    @media (max-width: 768px) {
+      .floating-fruit { font-size: 15vw; }
+      .fruit-left.fruit-4, .fruit-right.fruit-8 { display: none; }
+    }
 
     .container {
       width: 90%;
@@ -475,7 +517,7 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.8s ease;
-      loading: lazy;
+
     }
 
     .product-card:hover .product-img img {
@@ -666,14 +708,100 @@
         align-items: center;
       }
     }
+        /* Floating Fruit Animations */
+    .fruit, .floating-fruit {
+      position: absolute;
+      z-index: -1;
+      opacity: 0.15;
+      filter: blur(1px);
+      font-size: 3rem;
+      pointer-events: none;
+      user-select: none;
+      animation: float 15s infinite ease-in-out;
+    }
+    .fruit-1 { top: 10%; left: 5%; animation-delay: 0s;}
+    .fruit-2 { top: 25%; right: 7%; animation-delay: 2s;}
+    .fruit-3 { bottom: 30%; left: 10%; animation-delay: 4s;}
+    .fruit-4 { bottom: 15%; right: 12%; animation-delay: 6s;}
+    .fruit-5 { top: 40%; right: 20%; animation-delay: 8s;}
+    /* Extra floating fruits for more animation */
+    .floating-fruit.fruit-6 { top: 60%; left: 15%; font-size:2.8rem; animation-delay: 3s;}
+    .floating-fruit.fruit-7 { top: 80%; right: 16%; font-size:2.6rem; animation-delay: 7s;}
+    .floating-fruit.fruit-8 { top: 5%; right: 35%; font-size:3.3rem; animation-delay: 5s;}
+    .floating-fruit.fruit-9 { bottom: 5%; left: 35%; font-size:3.1rem; animation-delay: 10s;}
+    .floating-fruit.fruit-10 { top: 20%; left: 60%; font-size:2.9rem; animation-delay: 8.8s;}
+    .floating-fruit.fruit-11 { bottom: 25%; right: 47%; font-size:2.7rem; animation-delay: 12.5s;}
+    .floating-fruit.fruit-12 { top: 55%; right: 55%; font-size:2.4rem; animation-delay: 13.5s;}
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1) rotate(0deg);}
+      50% { transform: translateY(-40px) scale(1.07) rotate(8deg);}
+      100% { transform: translateY(0) scale(1) rotate(0deg);}
+    }
+
+    /* Animated Fruits in Hero Background */
+    .hero-fruits {
+      position: absolute;
+      left: 0; right: 0; top: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 1;
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+    .hero-fruit {
+      position: absolute;
+      font-size: 3.5rem;
+      opacity: 0.18;
+      animation: heroFruitAnim 6s infinite alternate cubic-bezier(.46,1.04,.52,1.02);
+    }
+    .hero-fruit.fruit-apple { top: 12%; left: 18%; animation-delay: 1s;}
+    .hero-fruit.fruit-orange { top: 60%; left: 35%; animation-delay: 2s;}
+    .hero-fruit.fruit-grape { top: 40%; right: 30%; animation-delay: 3s;}
+    .hero-fruit.fruit-berry { top: 20%; right: 18%; animation-delay: 4s;}
+    .hero-fruit.fruit-lemon { bottom: 15%; left: 24%; animation-delay: 2.5s;}
+    .hero-fruit.fruit-cherry { bottom: 17%; right: 25%; animation-delay: 3.7s;}
+    .hero-fruit.fruit-peach { top: 35%; left: 50%; animation-delay: 5s;}
+    .hero-fruit.fruit-pear { top: 75%; right: 55%; animation-delay: 5.8s;}
+    @keyframes heroFruitAnim {
+      0% { transform: translateY(0) scale(1) rotate(0deg);}
+      100% { transform: translateY(-25px) scale(1.12) rotate(9deg);}
+    }
+
+    /* ... rest of your styles ... */
   </style>
 </head>
 <body>
+  <!-- Floating fruits everywhere -->
   <div class="fruit fruit-1">🍓</div>
   <div class="fruit fruit-2">🍊</div>
   <div class="fruit fruit-3">🍒</div>
   <div class="fruit fruit-4">🍑</div>
   <div class="fruit fruit-5">🍋</div>
+  <!-- Extra floating fruits for page feel -->
+  <span class="floating-fruit fruit-left fruit-1">🍓</span>
+  <span class="floating-fruit fruit-left fruit-2">🍊</span>
+  <span class="floating-fruit fruit-left fruit-3">🍒</span>
+  <span class="floating-fruit fruit-left fruit-4">🍏</span>
+  <span class="floating-fruit fruit-right fruit-5">🍍</span>
+  <span class="floating-fruit fruit-right fruit-6">🍌</span>
+  <span class="floating-fruit fruit-right fruit-7">🍑</span>
+  <span class="floating-fruit fruit-right fruit-8">🍋</span>
+
+
+
+
+  <section class="hero">
+    <div class="hero-fruits">
+      <span class="hero-fruit fruit-apple">🍏</span>
+      <span class="hero-fruit fruit-orange">🍊</span>
+      <span class="hero-fruit fruit-grape">🍇</span>
+      <span class="hero-fruit fruit-berry">🍓</span>
+      <span class="hero-fruit fruit-lemon">🍋</span>
+      <span class="hero-fruit fruit-cherry">🍒</span>
+      <span class="hero-fruit fruit-peach">🍑</span>
+      <span class="hero-fruit fruit-pear">🍐</span>
+    </div>
+  </style>
 
   <div class="cart-overlay" id="cartOverlay"></div>
   <div class="cart-sidebar" id="cartSidebar">
@@ -756,7 +884,7 @@
       <div class="products-grid" id="productsGrid">
         <div class="product-card" data-category="jams">
           <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1623846547660-b6c9c0d1a996?auto=format&fit=crop&w=600&q=80" alt="مربای بهار نارنج" loading="lazy">
+            <img src="moorabba/images/bahar.jpeg" alt="مربای بهار نارنج" loading="lazy">
             <div class="product-badge">پرفروش</div>
           </div>
           <div class="product-content">
@@ -764,13 +892,13 @@
             <p class="product-desc">ترکیبی بی‌نظیر از گل‌های تازه بهار نارنج با عطر و طعمی فراموش‌نشدنی</p>
             <div class="product-meta">
               <div class="product-price">۴۵,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="1" data-name="مربای بهار نارنج" data-price="45000" data-image="https://images.unsplash.com/photo-1623846547660-b6c9c0d1a996?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
+              <button class="btn add-to-cart" data-id="1" data-name="مربای بهار نارنج" data-price="45000" data-image="moorabba/images/bahar.jpeg">افزودن به سبد</button>
             </div>
           </div>
         </div>
         <div class="product-card" data-category="jams">
           <div class="product-img">
-            <img src="https://images.unsplash.com/photo-1603532648955-a039f2e5da76?auto=format&fit=crop&w=600&q=80" alt="مربای تمشک کوهی" loading="lazy">
+            <img src="moorabba/images/toot.jpg" alt="مربای تمشک کوهی" loading="lazy">
             <div class="product-badge">جدید</div>
           </div>
           <div class="product-content">
@@ -778,7 +906,7 @@
             <p class="product-desc">تمشک‌های ارگانیک کوهی با طعم ترش و شیرین طبیعی</p>
             <div class="product-meta">
               <div class="product-price">۵۵,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="2" data-name="مربای تمشک کوهی" data-price="55000" data-image="https://images.unsplash.com/photo-1603532648955-a039f2e5da76?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
+              <button class="btn add-to-cart" data-id="2" data-name="مربای تمشک کوهی" data-price="55000" data-image="moorabba/images/toot.jpg">افزودن به سبد</button>
             </div>
           </div>
         </div>
@@ -901,7 +1029,8 @@
       </div>
     </div>
   </footer>
-
+</body>
+</html>
   <script>
     let cart = [];
     const cartCount = document.getElementById('cartCount');
