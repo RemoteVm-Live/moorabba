@@ -36,30 +36,60 @@
       overflow-x: hidden;
     }
 
-    .fruit {
-      position: absolute;
-      z-index: -1;
-      opacity: 0.15;
-      filter: blur(1px);
-      font-size: 3rem;
+    .floating-fruit {
+      position: fixed;
+      z-index: 0;
+      opacity: 0.19;
+      filter: blur(1.2px);
+      font-size: 7vw;
       pointer-events: none;
       user-select: none;
-      animation: float 15s infinite ease-in-out;
+      animation-iteration-count: infinite;
+      animation-timing-function: cubic-bezier(.5,1.5,.5,-0.5);
       will-change: transform;
     }
-
-    .fruit-1 { top: 10%; left: 5%; animation-delay: 0s; }
-    .fruit-2 { top: 25%; right: 7%; animation-delay: 2s; }
-    .fruit-3 { bottom: 30%; left: 10%; animation-delay: 4s; }
-    .fruit-4 { bottom: 15%; right: 12%; animation-delay: 6s; }
-    .fruit-5 { top: 40%; right: 20%; animation-delay: 8s; }
-    .fruit-6 { top: 60%; left: 15%; font-size: 2.8rem; animation-delay: 3s; }
-    .fruit-7 { top: 80%; right: 16%; font-size: 2.6rem; animation-delay: 7s; }
-    .fruit-8 { top: 5%; right: 35%; font-size: 3.3rem; animation-delay: 5s; }
-    .fruit-9 { bottom: 5%; left: 35%; font-size: 3.1rem; animation-delay: 10s; }
-    .fruit-10 { top: 20%; left: 60%; font-size: 2.9rem; animation-delay: 8.8s; }
-    .fruit-11 { bottom: 25%; right: 47%; font-size: 2.7rem; animation-delay: 12.5s; }
-    .fruit-12 { top: 55%; right: 55%; font-size: 2.4rem; animation-delay: 13.5s; }
+    /* سمت چپ */
+    .fruit-left {
+      left: 0;
+      animation-name: fruitLeftAnim;
+    }
+    .fruit-left.fruit-1 { top: 8vh; animation-delay: 0s;}
+    .fruit-left.fruit-2 { top: 30vh; animation-delay: 2s;}
+    .fruit-left.fruit-3 { top: 72vh; animation-delay: 4s;}
+    .fruit-left.fruit-4 { top: 130vh; animation-delay: 6s;}
+    /* سمت راست */
+    .fruit-right {
+      right: 0;
+      animation-name: fruitRightAnim;
+    }
+    .fruit-right.fruit-5 { top: 16vh; animation-delay: 1s;}
+    .fruit-right.fruit-6 { top: 52vh; animation-delay: 3s;}
+    .fruit-right.fruit-7 { top: 100vh; animation-delay: 5s;}
+    .fruit-right.fruit-8 { top: 150vh; animation-delay: 7s;}
+    /* انیمیشن زیگزاگی و چرخشی */
+    .floating-fruit {
+      animation-duration: 16s;
+    }
+    @keyframes fruitLeftAnim {
+      0%   { transform: translateY(0) scale(1) rotate(0deg);}
+      16%  { transform: translateY(-35px) scale(1.07) rotate(-8deg);}
+      33%  { transform: translateY(20px) scale(1.13) rotate(-18deg);}
+      50%  { transform: translateY(-25px) scale(0.95) rotate(7deg);}
+      67%  { transform: translateY(18px) scale(1.09) rotate(-12deg);}
+      100% { transform: translateY(0) scale(1) rotate(0deg);}
+    }
+    @keyframes fruitRightAnim {
+      0%   { transform: translateY(0) scale(1) rotate(0deg);}
+      20%  { transform: translateY(25px) scale(1.09) rotate(10deg);}
+      40%  { transform: translateY(-25px) scale(1.15) rotate(18deg);}
+      60%  { transform: translateY(18px) scale(1.12) rotate(9deg);}
+      80%  { transform: translateY(-35px) scale(1.08) rotate(17deg);}
+      100% { transform: translateY(0) scale(1) rotate(0deg);}
+    }
+    @media (max-width: 768px) {
+      .floating-fruit { font-size: 15vw; }
+      .fruit-left.fruit-4, .fruit-right.fruit-8 { display: none; }
+    }
 
     .container {
       width: 90%;
@@ -132,7 +162,8 @@
     header {
       background: rgba(255, 255, 255, 0.95);
       box-shadow: var(--box-shadow);
-      position: sticky;
+      position: fixed;
+      width: 100%;
       top: 0;
       z-index: 1000;
       backdrop-filter: blur(10px);
@@ -208,7 +239,8 @@
       width: 22px;
       height: 22px;
       display: flex;
-igator: center;
+      justify-content: center;
+      align-items: center;
       font-size: 0.8rem;
       font-weight: bold;
       animation: pulse 2s infinite;
@@ -241,7 +273,7 @@ igator: center;
       height: 100%;
       background: white;
       z-index: 9999;
-      transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+      transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
       display: flex;
       flex-direction: column;
     }
@@ -410,36 +442,6 @@ igator: center;
       opacity: 0;
     }
 
-    .hero-fruits {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      pointer-events: none;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    .hero-fruit {
-      position: absolute;
-      font-size: 3.5rem;
-      opacity: 0.18;
-      animation: heroFruitAnim 6s infinite alternate cubic-bezier(.46,1.04,.52,1.02);
-      will-change: transform;
-    }
-
-    .hero-fruit.fruit-apple { top: 12%; left: 18%; animation-delay: 1s; }
-    .hero-fruit.fruit-orange { top: 60%; left: 35%; animation-delay: 2s; }
-    .hero-fruit.fruit-grape { top: 40%; right: 30%; animation-delay: 3s; }
-    .hero-fruit.fruit-berry { top: 20%; right: 18%; animation-delay: 4s; }
-    .hero-fruit.fruit-lemon { bottom: 15%; left: 24%; animation-delay: 2.5s; }
-    .hero-fruit.fruit-cherry { bottom: 17%; right: 25%; animation-delay: 3.7s; }
-    .hero-fruit.fruit-peach { top: 35%; left: 50%; animation-delay: 5s; }
-    .hero-fruit.fruit-pear { top: 75%; right: 55%; animation-delay: 5.8s; }
-
     .products {
       background: var(--white);
     }
@@ -515,6 +517,7 @@ igator: center;
       height: 100%;
       object-fit: cover;
       transition: transform 0.8s ease;
+      loading: lazy;
     }
 
     .product-card:hover .product-img img {
@@ -638,18 +641,6 @@ igator: center;
       transform: scale(1.2);
     }
 
-    .social-links a {
-      color: var(--white);
-      margin-right: 15px;
-      font-size: 1.5rem;
-      transition: var(--transition);
-    }
-
-    .social-links a:hover {
-      color: var(--accent);
-      transform: scale(1.2);
-    }
-
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -687,17 +678,6 @@ igator: center;
       to { transform: rotate(360deg); }
     }
 
-    @keyframes float {
-      0% { transform: translateY(0) scale(1) rotate(0deg); }
-      50% { transform: translateY(-40px) scale(1.07) rotate(8deg); }
-      100% { transform: translateY(0) scale(1) rotate(0deg); }
-    }
-
-    @keyframes heroFruitAnim {
-      0% { transform: translateY(0) scale(1) rotate(0deg); }
-      100% { transform: translateY(-25px) scale(1.12) rotate(9deg); }
-    }
-
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
@@ -708,7 +688,7 @@ igator: center;
         height: calc(100vh - 80px);
         flex-direction: column;
         padding: 40px 20px;
-        transition: right 0.5s ease;
+        transition: var(--transition);
       }
 
       .nav-links.active {
@@ -727,93 +707,91 @@ igator: center;
         flex-direction: column;
         align-items: center;
       }
+    }
+        /* Floating Fruit Animations */
+    .fruit, .floating-fruit {
+      position: absolute;
+      z-index: -1;
+      opacity: 0.15;
+      filter: blur(1px);
+      font-size: 3rem;
+      pointer-events: none;
+      user-select: none;
+      animation: float 15s infinite ease-in-out;
+    }
+    .fruit-1 { top: 10%; left: 5%; animation-delay: 0s;}
+    .fruit-2 { top: 25%; right: 7%; animation-delay: 2s;}
+    .fruit-3 { bottom: 30%; left: 10%; animation-delay: 4s;}
+    .fruit-4 { bottom: 15%; right: 12%; animation-delay: 6s;}
+    .fruit-5 { top: 40%; right: 20%; animation-delay: 8s;}
+    /* Extra floating fruits for more animation */
+    .floating-fruit.fruit-6 { top: 60%; left: 15%; font-size:2.8rem; animation-delay: 3s;}
+    .floating-fruit.fruit-7 { top: 80%; right: 16%; font-size:2.6rem; animation-delay: 7s;}
+    .floating-fruit.fruit-8 { top: 5%; right: 35%; font-size:3.3rem; animation-delay: 5s;}
+    .floating-fruit.fruit-9 { bottom: 5%; left: 35%; font-size:3.1rem; animation-delay: 10s;}
+    .floating-fruit.fruit-10 { top: 20%; left: 60%; font-size:2.9rem; animation-delay: 8.8s;}
+    .floating-fruit.fruit-11 { bottom: 25%; right: 47%; font-size:2.7rem; animation-delay: 12.5s;}
+    .floating-fruit.fruit-12 { top: 55%; right: 55%; font-size:2.4rem; animation-delay: 13.5s;}
 
-      .hero-fruit {
-        font-size: 2.5rem;
-      }
+    @keyframes float {
+      0% { transform: translateY(0) scale(1) rotate(0deg);}
+      50% { transform: translateY(-40px) scale(1.07) rotate(8deg);}
+      100% { transform: translateY(0) scale(1) rotate(0deg);}
     }
 
-    @media (max-width: 480px) {
-      .hero-fruit {
-        display: none;
-      }
+    /* Animated Fruits in Hero Background */
+    .hero-fruits {
+      position: absolute;
+      left: 0; right: 0; top: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 1;
+      width: 100%; height: 100%;
+      overflow: hidden;
     }
+    .hero-fruit {
+      position: absolute;
+      font-size: 3.5rem;
+      opacity: 0.18;
+      animation: heroFruitAnim 6s infinite alternate cubic-bezier(.46,1.04,.52,1.02);
+    }
+    .hero-fruit.fruit-apple { top: 12%; left: 18%; animation-delay: 1s;}
+    .hero-fruit.fruit-orange { top: 60%; left: 35%; animation-delay: 2s;}
+    .hero-fruit.fruit-grape { top: 40%; right: 30%; animation-delay: 3s;}
+    .hero-fruit.fruit-berry { top: 20%; right: 18%; animation-delay: 4s;}
+    .hero-fruit.fruit-lemon { bottom: 15%; left: 24%; animation-delay: 2.5s;}
+    .hero-fruit.fruit-cherry { bottom: 17%; right: 25%; animation-delay: 3.7s;}
+    .hero-fruit.fruit-peach { top: 35%; left: 50%; animation-delay: 5s;}
+    .hero-fruit.fruit-pear { top: 75%; right: 55%; animation-delay: 5.8s;}
+    @keyframes heroFruitAnim {
+      0% { transform: translateY(0) scale(1) rotate(0deg);}
+      100% { transform: translateY(-25px) scale(1.12) rotate(9deg);}
+    }
+
+    /* ... rest of your styles ... */
   </style>
 </head>
 <body>
-  <!-- Floating fruits -->
-  <div class="fruit fruit-1" aria-hidden="true">🍓</div>
-  <div class="fruit fruit-2" aria-hidden="true">🍊</div>
-  <div class="fruit fruit-3" aria-hidden="true">🍒</div>
-  <div class="fruit fruit-4" aria-hidden="true">🍑</div>
-  <div class="fruit fruit-5" aria-hidden="true">🍋</div>
-  <div class="fruit fruit-6" aria-hidden="true">🍏</div>
-  <div class="fruit fruit-7" aria-hidden="true">🍇</div>
-  <div class="fruit fruit-8" aria-hidden="true">🍉</div>
-  <div class="fruit fruit-9" aria-hidden="true">🍍</div>
-  <div class="fruit fruit-10" aria-hidden="true">🥭</div>
-  <div class="fruit fruit-11" aria-hidden="true">🍈</div>
-  <div class="fruit fruit-12" aria-hidden="true">🍐</div>
+  <!-- Floating fruits everywhere -->
+  <div class="fruit fruit-1">🍓</div>
+  <div class="fruit fruit-2">🍊</div>
+  <div class="fruit fruit-3">🍒</div>
+  <div class="fruit fruit-4">🍑</div>
+  <div class="fruit fruit-5">🍋</div>
+  <!-- Extra floating fruits for page feel -->
+  <span class="floating-fruit fruit-left fruit-1">🍓</span>
+  <span class="floating-fruit fruit-left fruit-2">🍊</span>
+  <span class="floating-fruit fruit-left fruit-3">🍒</span>
+  <span class="floating-fruit fruit-left fruit-4">🍏</span>
+  <span class="floating-fruit fruit-right fruit-5">🍍</span>
+  <span class="floating-fruit fruit-right fruit-6">🍌</span>
+  <span class="floating-fruit fruit-right fruit-7">🍑</span>
+  <span class="floating-fruit fruit-right fruit-8">🍋</span>
 
-  <div class="cart-overlay" id="cartOverlay" role="presentation"></div>
-  <div class="cart-sidebar" id="cartSidebar" role="dialog" aria-label="سبد خرید">
-    <div class="cart-header">
-      <h3 class="cart-title">سبد خرید</h3>
-      <button class="close-cart" id="closeCart" aria-label="بستن سبد خرید"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="cart-body" id="cartBody">
-      <div class="empty-cart-message" style="text-align: center; padding: 40px 20px; display: none;" id="emptyCart">
-        <i class="fas fa-shopping-cart" style="font-size: 5rem; color: #eee; margin-bottom: 20px;" aria-hidden="true"></i>
-        <h3 style="color: var(--light-text); margin-bottom: 15px;">سبد خرید شما خالی است</h3>
-        <p>محصولات خود را به سبد خرید اضافه کنید</p>
-        <button class="btn" onclick="closeCart()" aria-label="بازگشت به فروشگاه">بازگشت به فروشگاه</button>
-      </div>
-    </div>
-    <div class="cart-footer" id="cartFooter" style="display: none;">
-      <div class="cart-total">
-        <span>مجموع:</span>
-        <span id="cartTotalPrice">۰ تومان</span>
-      </div>
-      <button class="checkout-btn" id="checkoutBtn" aria-label="تکمیل سفارش">تکمیل سفارش</button>
-    </div>
-  </div>
 
-  <div class="payment-modal" id="paymentModal" role="dialog" aria-label="پرداخت سفارش">
-    <div class="payment-content">
-      <div class="payment-header">
-        <h2>پرداخت سفارش</h2>
-      </div>
-      <div class="payment-body">
-        <p>لطفاً برای پرداخت با پشتیبانی تماس بگیرید:</p>
-        <p><strong>شماره تماس:</strong> ۰۹۱۲۳۴۵۶۷۸۹</p>
-        <p><strong>ایمیل:</strong> info@Moorabba.ir</p>
-        <button class="btn" onclick="closePaymentModal()" aria-label="بستن پنجره پرداخت">بستن</button>
-      </div>
-    </div>
-  </div>
 
-  <header>
-    <div class="container nav-container">
-      <a href="#" class="logo" aria-label="صفحه اصلی Moorabba.ir"><i class="fas fa-jar" aria-hidden="true"></i> Moorabba.ir</a>
-      <div style="display: flex; align-items: center;">
-        <div class="cart-icon" id="openCart" role="button" aria-label="باز کردن سبد خرید"><i class="fas fa-shopping-cart" aria-hidden="true"></i><span class="cart-count" id="cartCount">0</span></div>
-        <button class="mobile-menu-btn" aria-label="باز کردن منوی موبایل"><i class="fas fa-bars"></i></button>
-      </div>
-      <nav class="nav-links" role="navigation">
-        <ul>
-          <li><a href="#" aria-current="page">خانه</a></li>
-          <li><a href="#about">درباره ما</a></li>
-          <li><a href="#products">مرباها</a></li>
-          <li><a href="#products" data-filter="pickles">ترشیجات</a></li>
-          <li><a href="#products" data-filter="distillates">عرقیجات</a></li>
-          <li><a href="#contact">تماس</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
   <section class="hero">
-    <div class="hero-fruits" aria-hidden="true">
+    <div class="hero-fruits">
       <span class="hero-fruit fruit-apple">🍏</span>
       <span class="hero-fruit fruit-orange">🍊</span>
       <span class="hero-fruit fruit-grape">🍇</span>
@@ -823,13 +801,71 @@ igator: center;
       <span class="hero-fruit fruit-peach">🍑</span>
       <span class="hero-fruit fruit-pear">🍐</span>
     </div>
+  </style>
+
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3 class="cart-title">سبد خرید</h3>
+      <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-body" id="cartBody">
+      <div class="empty-cart-message" style="text-align: center; padding: 40px 20px; display: none;" id="emptyCart">
+        <i class="fas fa-shopping-cart" style="font-size: 5rem; color: #eee; margin-bottom: 20px;"></i>
+        <h3 style="color: var(--light-text); margin-bottom: 15px;">سبد خرید شما خالی است</h3>
+        <p>محصولات خود را به سبد خرید اضافه کنید</p>
+        <button class="btn" style="margin-top: 20px;" onclick="closeCart()">بازگشت به فروشگاه</button>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+      <div class="cart-total">
+        <span>مجموع:</span>
+        <span id="cartTotalPrice">۰ تومان</span>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn">تکمیل سفارش</button>
+    </div>
+  </div>
+
+  <div class="payment-modal" id="paymentModal">
+    <div class="payment-content">
+      <div class="payment-header">
+        <h2>پرداخت سفارش</h2>
+      </div>
+      <div class="payment-body">
+        <p>لطفاً برای پرداخت با پشتیبانی تماس بگیرید:</p>
+        <p><strong>شماره تماس:</strong> ۰۹۱۲۳۴۵۶۷۸۹</p>
+        <p><strong>ایمیل:</strong> info@Moorabba.ir</p>
+        <button class="btn" onclick="closePaymentModal()">بستن</button>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo"><i class="fas fa-jar"></i> Moorabba.ir</a>
+      <div style="display: flex; align-items: center;">
+        <div class="cart-icon" id="openCart"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></div>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">خانه</a></li>
+        <li><a href="#about">درباره ما</a></li>
+        <li><a href="#products">مرباها</a></li>
+        <li><a href="#products" data-filter="pickles">ترشیجات</a></li>
+        <li><a href="#products" data-filter="distillates">عرقیجات</a></li>
+        <li><a href="#contact">تماس</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="hero">
     <div class="container">
       <div class="hero-content">
         <h1>مرباها، ترشیجات و عرقیجات خانگی با طعم اصیل</h1>
         <p>تجربه طعم‌های طبیعی و ارگانیک با استفاده از بهترین مواد اولیه و روش‌های سنتی</p>
         <div class="hero-btns">
-          <a href="#products" class="btn" aria-label="مشاهده محصولات">مشاهده محصولات</a>
-          <a href="#about" class="btn" style="background: transparent; border: 2px solid white;" aria-label="درباره ما">درباره ما</a>
+          <a href="#products" class="btn">مشاهده محصولات</a>
+          <a href="#about" class="btn" style="background: transparent; border: 2px solid white;">درباره ما</a>
         </div>
       </div>
     </div>
@@ -839,11 +875,11 @@ igator: center;
     <div class="container">
       <h2 class="section-title">محصولات ارگانیک</h2>
       <p class="section-subtitle">لذت طعم‌های متنوع و طبیعی را با محصولات خانگی ما تجربه کنید</p>
-      <div class="product-filter" role="tablist">
-        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">همه</button>
-        <button class="filter-btn" data-filter="jams" role="tab" aria-selected="false">مرباها</button>
-        <button class="filter-btn" data-filter="pickles" role="tab" aria-selected="false">ترشیجات</button>
-        <button class="filter-btn" data-filter="distillates" role="tab" aria-selected="false">عرقیجات</button>
+      <div class="product-filter">
+        <button class="filter-btn active" data-filter="all">همه</button>
+        <button class="filter-btn" data-filter="jams">مرباها</button>
+        <button class="filter-btn" data-filter="pickles">ترشیجات</button>
+        <button class="filter-btn" data-filter="distillates">عرقیجات</button>
       </div>
       <div class="products-grid" id="productsGrid">
         <div class="product-card" data-category="jams">
@@ -856,21 +892,21 @@ igator: center;
             <p class="product-desc">ترکیبی بی‌نظیر از گل‌های تازه بهار نارنج با عطر و طعمی فراموش‌نشدنی</p>
             <div class="product-meta">
               <div class="product-price">۴۵,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="1" data-name="مربای بهار نارنج" data-price="45000" data-image="https://images.unsplash.com/photo-1623846547660-b6c9c0d1a996?auto=format&fit=crop&w=600&q=80" aria-label="افزودن مربای بهار نارنج به سبد خرید">افزودن به سبد</button>
+              <button class="btn add-to-cart" data-id="1" data-name="مربای بهار نارنج" data-price="45000" data-image="https://images.unsplash.com/photo-1623846547660-b6c9c0d1a996?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
             </div>
           </div>
         </div>
         <div class="product-card" data-category="jams">
           <div class="product-img">
-            <img src="/images/toot.jpg" alt="مربای توت فرنگی" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1603532648955-a039f2e5da76?auto=format&fit=crop&w=600&q=80" alt="مربای تمشک کوهی" loading="lazy">
             <div class="product-badge">جدید</div>
           </div>
           <div class="product-content">
-            <h3 class="product-title">مربای توت فرنگی</h3>
-            <p class="product-desc">توت فرنگی ارگانیک  با طعم ترش و شیرین طبیعی</p>
+            <h3 class="product-title">مربای تمشک کوهی</h3>
+            <p class="product-desc">تمشک‌های ارگانیک کوهی با طعم ترش و شیرین طبیعی</p>
             <div class="product-meta">
               <div class="product-price">۵۵,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="2" data-name="مربای تمشک کوهی" data-price="55000" data-image="/images/toot.jpg" aria-label="افزودن مربای تمشک کوهی به سبد خرید">افزودن به سبد</button>
+              <button class="btn add-to-cart" data-id="2" data-name="مربای تمشک کوهی" data-price="55000" data-image="https://images.unsplash.com/photo-1603532648955-a039f2e5da76?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
             </div>
           </div>
         </div>
@@ -884,7 +920,7 @@ igator: center;
             <p class="product-desc">ترشی گل کلم با طعم تند و متعادل، تهیه شده با سبزیجات تازه</p>
             <div class="product-meta">
               <div class="product-price">۴۸,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="5" data-name="ترشی گل کلم" data-price="48000" data-image="https://images.unsplash.com/photo-1599923379370-6d1b8b9263c7?auto=format&fit=crop&w=600&q=80" aria-label="افزودن ترشی گل کلم به سبد خرید">افزودن به سبد</button>
+              <button class="btn add-to-cart" data-id="5" data-name="ترشی گل کلم" data-price="48000" data-image="https://images.unsplash.com/photo-1599923379370-6d1b8b9263c7?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
             </div>
           </div>
         </div>
@@ -898,7 +934,7 @@ igator: center;
             <p class="product-desc">ترشی لیته با ترکیب سبزیجات خرد شده و ادویه‌های سنتی</p>
             <div class="product-meta">
               <div class="product-price">۴۵,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="6" data-name="ترشی لیته" data-price="45000" data-image="https://images.unsplash.com/photo-1600431521340-453d757bc0f1?auto=format&fit=crop&w=600&q=80" aria-label="افزودن ترشی لیته به سبد خرید">افزودن به سبد</button>
+              <button class="btn add-to-cart" data-id="6" data-name="ترشی لیته" data-price="45000" data-image="https://images.unsplash.com/photo-1600431521340-453d757bc0f1?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
             </div>
           </div>
         </div>
@@ -912,7 +948,7 @@ igator: center;
             <p class="product-desc">عرق نعنا خالص و ارگانیک با خواص گوارشی و آرام‌بخش</p>
             <div class="product-meta">
               <div class="product-price">۳۵,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="7" data-name="عرق نعنا" data-price="35000" data-image="images/nanah.jpeg" aria-label="افزودن عرق نعنا به سبد خرید">افزودن به سبد</button>
+              <button class="btn add-to-cart" data-id="7" data-name="عرق نعنا" data-price="35000" data-image="https://images.unsplash.com/photo-1598373182133-524af156dc9b?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
             </div>
           </div>
         </div>
@@ -925,7 +961,7 @@ igator: center;
             <p class="product-desc">عرق بادرنجبویه با خواص آرام‌بخش و تقویت‌کننده قلب</p>
             <div class="product-meta">
               <div class="product-price">۳۸,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="8" data-name="عرق بادرنجبویه" data-price="38000" data-image="images/badranj.jpg" aria-label="افزودن عرق بادرنجبویه به سبد خرید">افزودن به سبد</button>
+              <button class="btn add-to-cart" data-id="8" data-name="عرق بادرنجبویه" data-price="38000" data-image="https://images.unsplash.com/photo-1619451050571-4c846589e4d9?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
             </div>
           </div>
         </div>
@@ -938,7 +974,7 @@ igator: center;
             <p class="product-desc">عرق آویشن ارگانیک با خواص ضدعفونی‌کننده و تقویت‌کننده</p>
             <div class="product-meta">
               <div class="product-price">۳۶,۰۰۰ تومان</div>
-              <button class="btn add-to-cart" data-id="9" data-name="عرق آویشن" data-price="36000" data-image="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80" aria-label="افزودن عرق آویشن به سبد خرید">افزودن به سبد</button>
+              <button class="btn add-to-cart" data-id="9" data-name="عرق آویشن" data-price="36000" data-image="https://images.unsplash.com/photo-1608059386283-4d2d27e72b81?auto=format&fit=crop&w=600&q=80">افزودن به سبد</button>
             </div>
           </div>
         </div>
@@ -953,38 +989,38 @@ igator: center;
           <h4>درباره Moorabba.ir</h4>
           <p>ما با عشق و هنر، طعم‌های بی‌نظیر را برای شما خلق می‌کنیم. محصولات ما شامل مرباها، ترشیجات و عرقیجات ارگانیک است.</p>
           <div class="social-links">
-            <a href="#" aria-label="اینستاگرام Moorabba.ir"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-            <a href="#" aria-label="تلگرام Moorabba.ir"><i class="fab fa-telegram" aria-hidden="true"></i></a>
-            <a href="#" aria-label="واتساپ Moorabba.ir"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-            <a href="#" aria-label="فیسبوک Moorabba.ir"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
         <div class="footer-col">
           <h4>لینک‌های مفید</h4>
           <ul class="footer-links">
-            <li><a href="#" aria-label="صفحه اصلی"><i class="fas fa-chevron-left" aria-hidden="true"></i> خانه</a></li>
-            <li><a href="#about" aria-label="درباره ما"><i class="fas fa-chevron-left" aria-hidden="true"></i> درباره ما</a></li>
-            <li><a href="#products" aria-label="محصولات"><i class="fas fa-chevron-left" aria-hidden="true"></i> محصولات</a></li>
-            <li><a href="#contact" aria-label="تماس با ما"><i class="fas fa-chevron-left" aria-hidden="true"></i> تماس</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> خانه</a></li>
+            <li><a href="#about"><i class="fas fa-chevron-left"></i> درباره ما</a></li>
+            <li><a href="#products"><i class="fas fa-chevron-left"></i> محصولات</a></li>
+            <li><a href="#contact"><i class="fas fa-chevron-left"></i> تماس</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>محصولات پرفروش</h4>
           <ul class="footer-links">
-            <li><a href="#" aria-label="مربای بهار نارنج"><i class="fas fa-chevron-left" aria-hidden="true"></i> مربای بهار نارنج</a></li>
-            <li><a href="#" aria-label="ترشی گل کلم"><i class="fas fa-chevron-left" aria-hidden="true"></i> ترشی گل کلم</a></li>
-            <li><a href="#" aria-label="عرق نعنا"><i class="fas fa-chevron-left" aria-hidden="true"></i> عرق نعنا</a></li>
-            <li><a href="#" aria-label="مربای تمشک کوهی"><i class="fas fa-chevron-left" aria-hidden="true"></i> مربای تمشک کوهی</a></li>
-            <li><a href="#" aria-label="ترشی لیته"><i class="fas fa-chevron-left" aria-hidden="true"></i> ترشی لیته</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> مربای بهار نارنج</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> ترشی گل کلم</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> عرق نعنا</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> مربای تمشک کوهی</a></li>
+            <li><a href="#"><i class="fas fa-chevron-left"></i> ترشی لیته</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>تماس با ما</h4>
           <ul class="contact-info">
-            <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>تهران، خیابان ولیعصر، کوچه فلان، پلاک ۱۲۳</span></li>
-            <li><i class="fas fa-phone-alt" aria-hidden="true"></i><span>۰۲۱-۱۲۳۴۵۶۷۸</span></li>
-            <li><i class="fas fa-mobile-alt" aria-hidden="true"></i><span>۰۹۱۲۳۴۵۶۷۸۹</span></li>
-            <li><i class="fas fa-envelope" aria-hidden="true"></i><span>info@Moorabba.ir</span></li>
+            <li><i class="fas fa-map-marker-alt"></i><span>تهران، خیابان ولیعصر، کوچه فلان، پلاک ۱۲۳</span></li>
+            <li><i class="fas fa-phone-alt"></i><span>۰۲۱-۱۲۳۴۵۶۷۸</span></li>
+            <li><i class="fas fa-mobile-alt"></i><span>۰۹۱۲۳۴۵۶۷۸۹</span></li>
+            <li><i class="fas fa-envelope"></i><span>info@Moorabba.ir</span></li>
           </ul>
         </div>
       </div>
@@ -993,9 +1029,10 @@ igator: center;
       </div>
     </div>
   </footer>
-
+</body>
+</html>
   <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = [];
     const cartCount = document.getElementById('cartCount');
     const cartBody = document.getElementById('cartBody');
     const cartFooter = document.getElementById('cartFooter');
@@ -1009,26 +1046,18 @@ igator: center;
     const paymentModal = document.getElementById('paymentModal');
     const productsGrid = document.getElementById('productsGrid');
 
-    // Initialize cart
-    updateCart();
-
     openCartBtn.addEventListener('click', openCart);
     closeCartBtn.addEventListener('click', closeCart);
     cartOverlay.addEventListener('click', closeCart);
 
     document.querySelectorAll('.add-to-cart').forEach(button => {
       button.addEventListener('click', function() {
-        try {
-          const id = this.dataset.id;
-          const name = this.dataset.name;
-          const price = parseInt(this.dataset.price);
-          const image = this.dataset.image;
-          if (!id || !name || !price || !image) throw new Error('Invalid product data');
-          addToCart(id, name, price, image);
-          openCart();
-        } catch (error) {
-          console.error('Error adding to cart:', error);
-        }
+        const id = this.dataset.id;
+        const name = this.dataset.name;
+        const price = parseInt(this.dataset.price);
+        const image = this.dataset.image;
+        addToCart(id, name, price, image);
+        openCart();
       });
     });
 
@@ -1039,7 +1068,8 @@ igator: center;
 
     paymentModal.addEventListener('click', (e) => {
       if (e.target === paymentModal) {
-        closePaymentModal();
+        paymentModal.classList.remove('active');
+        document.body.style.overflow = '';
       }
     });
 
@@ -1050,12 +1080,8 @@ igator: center;
 
     document.querySelectorAll('.filter-btn').forEach(button => {
       button.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-          btn.classList.remove('active');
-          btn.setAttribute('aria-selected', 'false');
-        });
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
-        button.setAttribute('aria-selected', 'true');
         const filter = button.dataset.filter;
         document.querySelectorAll('.product-card').forEach(card => {
           card.style.display = filter === 'all' || card.dataset.category === filter ? 'block' : 'none';
@@ -1070,13 +1096,11 @@ igator: center;
       } else {
         cart.push({ id, name, price, image, quantity: 1 });
       }
-      localStorage.setItem('cart', JSON.stringify(cart));
       updateCart();
     }
 
     function updateCart() {
       cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-      const fragment = document.createDocumentFragment();
       cartBody.innerHTML = '';
       if (cart.length === 0) {
         emptyCart.style.display = 'block';
@@ -1089,22 +1113,21 @@ igator: center;
           cartItem.className = 'cart-item';
           cartItem.innerHTML = `
             <div class="cart-item-image">
-              <img src="${item.image}" alt="${item.name}" loading="lazy">
+              <img src="${item.image}" alt="${item.name}">
             </div>
             <div class="cart-item-details">
               <h3 class="cart-item-title">${item.name}</h3>
               <div class="cart-item-price">${item.price.toLocaleString()} تومان</div>
               <div class="cart-item-actions">
-                <button class="quantity-btn decrease" data-id="${item.id}" aria-label="کاهش تعداد ${item.name}">-</button>
+                <button class="quantity-btn decrease" data-id="${item.id}">-</button>
                 <span class="item-quantity">${item.quantity}</span>
-                <button class="quantity-btn increase" data-id="${item.id}" aria-label="افزایش تعداد ${item.name}">+</button>
-                <button class="remove-item" data-id="${item.id}" aria-label="حذف ${item.name} از سبد خرید"><i class="fas fa-trash" aria-hidden="true"></i></button>
+                <button class="quantity-btn increase" data-id="${item.id}">+</button>
+                <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></button>
               </div>
             </div>
           `;
-          fragment.appendChild(cartItem);
+          cartBody.appendChild(cartItem);
         });
-        cartBody.appendChild(fragment);
 
         document.querySelectorAll('.decrease').forEach(button => {
           button.addEventListener('click', function() {
@@ -1115,7 +1138,6 @@ igator: center;
             } else {
               cart = cart.filter(item => item.id !== id);
             }
-            localStorage.setItem('cart', JSON.stringify(cart));
             updateCart();
           });
         });
@@ -1125,7 +1147,6 @@ igator: center;
             const id = this.dataset.id;
             const item = cart.find(item => item.id === id);
             item.quantity++;
-            localStorage.setItem('cart', JSON.stringify(cart));
             updateCart();
           });
         });
@@ -1134,7 +1155,6 @@ igator: center;
           button.addEventListener('click', function() {
             const id = this.dataset.id;
             cart = cart.filter(item => item.id !== id);
-            localStorage.setItem('cart', JSON.stringify(cart));
             updateCart();
           });
         });
@@ -1148,7 +1168,6 @@ igator: center;
       cartOverlay.classList.add('active');
       cartSidebar.classList.add('active');
       document.body.style.overflow = 'hidden';
-      cartSidebar.focus();
     }
 
     function closeCart() {
@@ -1161,23 +1180,16 @@ igator: center;
     const navLinks = document.querySelector('.nav-links');
     mobileMenuBtn.addEventListener('click', () => {
       navLinks.classList.toggle('active');
-      mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times" aria-hidden="true"></i>' : '<i class="fas fa-bars" aria-hidden="true"></i>';
-      mobileMenuBtn.setAttribute('aria-label', navLinks.classList.contains('active') ? 'بستن منوی موبایل' : 'باز کردن منوی موبایل');
+      mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
     });
 
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('active');
-        mobileMenuBtn.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-        mobileMenuBtn.setAttribute('aria-label', 'باز کردن منوی موبایل');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         if (link.dataset.filter) {
-          document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active');
-            btn.setAttribute('aria-selected', 'false');
-          });
-          const filterBtn = document.querySelector(`.filter-btn[data-filter="${link.dataset.filter}"]`);
-          filterBtn.classList.add('active');
-          filterBtn.setAttribute('aria-selected', 'true');
+          document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+          document.querySelector(`.filter-btn[data-filter="${link.dataset.filter}"]`).classList.add('active');
           document.querySelectorAll('.product-card').forEach(card => {
             card.style.display = link.dataset.filter === 'all' || card.dataset.category === link.dataset.filter ? 'block' : 'none';
           });
@@ -1191,7 +1203,6 @@ igator: center;
           entry.target.classList.add('animated');
           entry.target.style.opacity = '1';
           entry.target.style.transform = 'translateY(0) scale(1)';
-          observer.unobserve(entry.target);
         }
       });
     }, { rootMargin: '0px', threshold: 0.1 });
